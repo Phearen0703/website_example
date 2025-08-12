@@ -29,3 +29,11 @@ Route::get('menu-edit/{id}',[MenuController::class, 'edit'])->name('menu.edit');
 
 Route::put('menu-update/{id}',[MenuController::class, 'update'])->name('menu.update');
 Route::get('menu-delete/{id}',[MenuController::class, 'destroy'])->name('menu.delete');
+
+
+Route::get('post-list', [App\Http\Controllers\PostController::class, 'index'])->name('post_list');
+Route::get('post-create', [App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+Route::post('post-store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store');
+Route::get('post-edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
+Route::put('post-update/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('post.update');
+Route::get('post-delete/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('post.delete');

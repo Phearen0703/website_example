@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h4 class="card-title">Menu</h4>
+                                <h4 class="card-title">Post</h4>
                             </div><!--end col-->
                             <div class="col-auto">
                                 <form class="row g-2">
@@ -70,9 +70,9 @@
                                     </div><!--end col-->
 
                                     <div class="col-auto">
-                                        <a href="{{ route('menu.create') }}" type="button" class="btn btn-primary"><i
+                                        <a href="{{ route('post.create') }}" type="button" class="btn btn-primary"><i
                                                 class="fa-solid fa-plus me-1"></i> Add
-                                            Menu</a>
+                                            Post</a>
                                     </div><!--end col-->
                                 </form>
                             </div><!--end col-->
@@ -85,14 +85,17 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>
-                                        <th class="ps-0">Name</th>
-                                        <th class="ps-0">Description</th>
-                                        <th class="ps-0">Created by</th>
-                                        <th class="ps-0">Created at</th>
-                                        <th class="ps-0">Updated by</th>
-                                        <th class="ps-0">Updated at</th>
-                                        <th class="ps-0">Deleted by</th>
-                                        <th class="ps-0">Deleted at</th>
+                                        <th class="ps-0">Menu</th>
+                                        <th class="ps-0">Title</th>
+                                        <th class="ps-0">Sub Title</th>
+                                        <th class="ps-0">Content</th>
+                                        <th class="ps-0">Thumnail</th>
+                                        <th class="ps-0">Deleted At</th>
+                                        <th class="ps-0">Updated At</th>
+                                        <th class="ps-0">Created At</th>
+                                        <th class="ps-0">Created By</th>
+                                        <th class="ps-0">Updated By</th>
+                                        <th class="ps-0">Deleted By</th>
                                         <th class="text-end">Action</th>
                                     </tr>
                                 </thead>
@@ -102,18 +105,23 @@
                                         @foreach ($rows as $row)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $row['name'] }}</td>
-                                                <td>{{ $row['description'] }}</td>
-                                                <td>{{ $row['created_name'] }}</td>
-                                                <td>{{ $row['created_at'] }}</td>
-                                                <td>{{ $row['updated_name'] }}</td>
+                                                <td>{{ $row['menu_name'] }}</td>
+                                                <td>{{ $row['title'] }}</td>
+                                                <td>{{ $row['subtitle'] }}</td>
+                                                <td>{{ $row['content'] }}</td>
+                                                <td>
+                                                    <img src="{{ asset($row['thumbnail']) }}" alt="thumbnail" class="rounded-circle" width="50px" height="50px"> 
+                                                </td>
+                                                <td>{{ $row['deleted_at'] }}</td>
                                                 <td>{{ $row['updated_at'] }}</td>
+                                                <td>{{ $row['created_at'] }}</td>
+                                                <td>{{ $row['created_name'] }}</td>
+                                                <td>{{ $row['updated_name'] }}</td>
                                                 <td>{{ $row['deleted_name'] }}</td>
-                                                <td>{{ $row['delete_at'] }}</td>
                                                 
                                                 <td class="text-end">
-                                                    <a class="btn btn-primary text-light" href="{{ route('menu.edit',['id'=>$row->id]) }}"><i class="las la-pen text-secondary fs-18"></i> Edit</a>
-                                                    <a class="btn btn-danger text-light" href="{{ route('menu.delete',['id'=>$row->id]) }}"><i class="las la-trash-alt text-secondary fs-18"></i> Delete</a>
+                                                    <a class="btn btn-primary text-light btn-sm" href="{{ route('post.edit',['id'=>$row->id]) }}"><i class="las la-pen fs-18"></i></a>
+                                                    <a class="btn btn-danger text-light btn-sm" href="{{ route('post.delete',['id'=>$row->id]) }}"><i class="las la-trash-alt fs-18"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

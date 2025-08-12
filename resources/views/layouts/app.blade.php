@@ -58,16 +58,16 @@
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="assets/images/flags/us_flag.jpg" alt="" class="thumb-sm rounded-circle">
+                            <img src="{{asset('backend/assets/images/flags/us_flag.jpg')}}" alt="" class="thumb-sm rounded-circle">
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#"><img src="assets/images/flags/us_flag.jpg"
+                            <a class="dropdown-item" href="#"><img src="{{asset('backend/assets/images/flags/us_flag.jpg')}}"
                                     alt="" height="15" class="me-2">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/images/flags/spain_flag.jpg"
+                            <a class="dropdown-item" href="#"><img src="{{asset('backend/assets/images/flags/spain_flag.jpg')}}"
                                     alt="" height="15" class="me-2">Spanish</a>
-                            <a class="dropdown-item" href="#"><img src="assets/images/flags/germany_flag.jpg"
+                            <a class="dropdown-item" href="#"><img src="{{asset('backend/assets/images/flags/germany_flag.jpg')}}"
                                     alt="" height="15" class="me-2">German</a>
-                            <a class="dropdown-item" href="#"><img src="assets/images/flags/french_flag.jpg"
+                            <a class="dropdown-item" href="#"><img src="{{asset('backend/assets/images/flags/french_flag.jpg')}}"
                                     alt="" height="15" class="me-2">French</a>
                         </div>
                     </li><!--end topbar-language-->
@@ -287,13 +287,13 @@
                     <li class="dropdown topbar-item">
                         <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown"
                             href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="assets/images/users/avatar-1.jpg" alt=""
+                            <img src="{{asset('backend/assets/images/users/avatar-1.jpg')}}" alt=""
                                 class="thumb-lg rounded-circle">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end py-0">
                             <div class="d-flex align-items-center dropdown-item py-2 bg-secondary-subtle">
                                 <div class="flex-shrink-0">
-                                    <img src="assets/images/users/avatar-1.jpg" alt=""
+                                    <img src="{{asset('backend/assets/images/users/avatar-1.jpg')}}" alt=""
                                         class="thumb-md rounded-circle">
                                 </div>
                                 <div class="flex-grow-1 ms-2 text-truncate align-self-center">
@@ -315,8 +315,14 @@
                             <a class="dropdown-item" href="pages-faq.html"><i
                                     class="las la-question-circle fs-18 me-1 align-text-bottom"></i> Help Center</a>
                             <div class="dropdown-divider mb-0"></div>
-                            <a class="dropdown-item text-danger" href="auth-login.html"><i
-                                    class="las la-power-off fs-18 me-1 align-text-bottom"></i> Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+
+                            <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="las la-power-off fs-18 me-1 align-text-bottom"></i> Logout
+                            </a>
+
                         </div>
                     </li>
                 </ul><!--end topbar-nav-->
@@ -331,11 +337,11 @@
         <div class="brand">
             <a href="index.html" class="logo">
                 <span>
-                    <img src="assets/images/logo-sm.png" alt="logo-small" class="logo-sm">
+                    <img src="{{asset('backend/assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
                 </span>
                 <span class="">
-                    <img src="assets/images/logo-light.png" alt="logo-large" class="logo-lg logo-light">
-                    <img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg logo-dark">
+                    <img src="{{asset('backend/assets/images/logo-light.png')}}" alt="logo-large" class="logo-lg logo-light">
+                    <img src="{{asset('backend/assets/images/logo-dark.png')}}" alt="logo-large" class="logo-lg logo-dark">
                 </span>
             </a>
         </div>
@@ -357,6 +363,14 @@
                             <a class="nav-link" href="{{route('menu_list')}}">
                                 <i class="iconoir-home-simple menu-icon"></i>
                                 <span>Menu</span>
+                            </a>
+                            
+                        </li><!--end nav-item-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('post_list')}}">
+                                <i class="iconoir-home-simple menu-icon"></i>
+                                <span>Post</span>
                             </a>
                             
                         </li><!--end nav-item-->

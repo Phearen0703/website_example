@@ -12,18 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menus', function (Blueprint $table) {
-            Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
 
-            $table->softDeletes(); // deleted_at
+            $table->softDeletes();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
 
-            $table->timestamps(); // created_at & updated_at
-        });
+            $table->timestamps();
         });
     }
 

@@ -9,10 +9,24 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index(){
-        $rows = Menu::whereNull('deleted_at')->get();
-        return view('menus.index',compact('rows'));
+    public function index()
+    {
+        $rows = Menu::whereNull('menus.deleted_at')
+        ->leftJoin('users as u1', 'menus.created_by', '=', 'u1.id')
+        ->leftJoin('users as u2', 'menus.updated_by', '=', 'u2.id')
+        ->leftJoin('users as u3', 'menus.deleted_by', '=', 'u3.id')
+        ->select(
+            'menus.*',
+            'u1.name as created_name',
+            'u2.name as updated_name',
+            'u3.name as deleted_name'
+        )
+        ->get();
+
+
+        return view('menus.index', compact('rows'));
     }
+
     public function create(){
         return view('menus.create');
     }
@@ -23,7 +37,9 @@ class MenuController extends Controller
         ]);
         Menu::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'created_by' => getCurrentUser()->id,
+            'created_at' => date('Y-m-d-H:i:s'),
         ]);
 
         return redirect()->route('menu_list');
@@ -45,14 +61,21 @@ class MenuController extends Controller
 
         $row->update([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'updated_by' => getCurrentUser()->id,
+            'updated_at' => date('Y-m-d-H:i:s'),
         ]);
         return redirect()->route('menu_list');
 
     }
     
     public function destroy($id){
-        $row = Menu::FindOrFail($id);
+       $row = Menu::findOrFail($id);
+
+        $row->update([
+            'deleted_by' => auth()->id(),
+        ]);
+
         $row->delete();
 
         return redirect()->route('menu_list');
